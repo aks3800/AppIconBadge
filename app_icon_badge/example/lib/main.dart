@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = const MethodChannel('method_channel.flutter.dev/appIconBadge');
 
-  // Get battery level.
+  // Get badge count
   String _badgeCount = 'Unknown badge count';
 
   Future<void> _getBadgeCount() async {
