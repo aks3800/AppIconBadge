@@ -1,7 +1,7 @@
 name: app_icon_badge
 description: A new flutter plugin project.
 version: 0.0.1
-author: Akshat Sharma
+
 homepage: https://github.com/aks3800/AppIconBadge
 
 environment:
