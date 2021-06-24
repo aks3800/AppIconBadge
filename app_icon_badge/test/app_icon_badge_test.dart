@@ -1,6 +1,6 @@
+import 'package:app_icon_badge/app_icon_badge.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:app_icon_badge/app_icon_badge.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('app_icon_badge');
@@ -9,7 +9,7 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      return 7;
     });
   });
 
@@ -17,7 +17,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await AppIconBadge.platformVersion, '42');
+  test('getBadgeCount', () async {
+    expect(await AppIconBadge.count, 7);
   });
 }

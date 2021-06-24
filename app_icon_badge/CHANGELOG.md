@@ -1,3 +1,3 @@
-## 0.0.1
+## [0.0.1] - 24th June 2021
 
-* TODO: Describe initial release.
+* Added support for getting the current app icon badge count.
