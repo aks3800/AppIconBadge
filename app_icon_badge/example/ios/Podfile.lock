@@ -1,0 +1,22 @@
+PODS:
+  - app_icon_badge (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - app_icon_badge (from `.symlinks/plugins/app_icon_badge/ios`)
+  - Flutter (from `Flutter`)
+
+EXTERNAL SOURCES:
+  app_icon_badge:
+    :path: ".symlinks/plugins/app_icon_badge/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  app_icon_badge: d11e76ab47d018112c03889019b0393287be118f
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.0

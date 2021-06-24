@@ -1,58 +1,72 @@
-import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:app_icon_badge/app_icon_badge.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'App Badge Icon',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Badge Count Demo'),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
 
   @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
+class _MyHomePageState extends State<MyHomePage> {
+  static const platform = const MethodChannel('method_channel.flutter.dev/appIconBadge');
+
+  // Get battery level.
+  String _badgeCount = 'Unknown badge count';
+
+  Future<void> _getBadgeCount() async {
+    String badgeCount;
     try {
-      platformVersion = await AppIconBadge.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      final int result = await AppIconBadge.count;
+      badgeCount = 'Badge count: $result';
+    } on PlatformException catch (e) {
+      badgeCount = "Failed to get badge count: '${e.message}'.";
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
     setState(() {
-      _platformVersion = platformVersion;
+      _badgeCount = badgeCount;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: Text('Get Badge Count'),
+              onPressed: _getBadgeCount,
+            ),
+            Text(_badgeCount),
+          ],
+        ),
+      ), //
     );
   }
 }
